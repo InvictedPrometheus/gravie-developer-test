@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Game Rentals 'R Us</title>
+
+    <!-- styles -->
+    {% style """/assets/bulma/css/bulma.min.css" %}
+    {% style """/assets/material-icons/css/material-icons.min.css" %}
+
+    {% style """/css/screen.css" %}
+  </head>
+  <body>
+      <!-- navbar -->
+      <nav class="navbar is-info">
+          <div class="container">
+              <div class="navbar-brand">
+                  <img class="navbar-item" src="https://upload.wikimedia.org/wikipedia/en/4/4b/Giant_Bomb_logo.png" style="font-weight:bold; height: 50px; width: 80px;"/>
+                  <span class="navbar-burger burger" data-target="nav-menu">
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                  </span>
+              </div>
+              <div id="nav-menu" class="navbar-menu">
+                  <div class="navbar-start">
+                      <a href="/" class="navbar-item{% ifequal page "home.html" %} is-active{%endifequal%}">Home</a>
+                  </div>
+              </div>
+          </div>
+      </nav>
+
+      <section class="section">
+          <div class="container">
+              {% block content %}
+              {% endblock %}
+          </div>
+      </section>
+
+    <!-- scripts -->
+    <script type="text/javascript">
+      (function() {
+        var burger = document.querySelector('.burger');
+        var nav = document.querySelector('#'+burger.dataset.target);
+        burger.addEventListener('click', function(){
+          burger.classList.toggle('is-active');
+          nav.classList.toggle('is-active');
+        });
+      })();
+    </script>
+
+    
+    {% block page-scripts %}
+    {% endblock %}
+  </body>
+</html>

@@ -1,36 +1,37 @@
 # Gravie Software Engineer Challenge
 
-## Instructions
+## Game Rentals 'R Us
 
-After completing the challenge below, please send us an email with the location of your repository. If
-your repository is private, be sure to add us as collaborators so we can view your code.
+This is a web application built on the [Luminus](https://luminusweb.com/) web framework for Clojure. For the MVP, users can:
 
-### Time Box
+- _Search_ => `/` => for games by title
+- _Rent_ => `/checkout?game_guid=<guid>` => single games for $4.99 / month by supplying contact, payment, and shipping information
 
-3-4 Hours
+The development application is backed by an embedded [H2](http://h2database.com/html/main.html) database engine.
 
-## Synopsis
+### Execution
 
-For this challenge you will implement the Giant Bomb API to create an application that will allow a
-user to search games and "rent" them. The application should consist of at least two unique pages
-(`search` and `checkout`). Your view should display the game thumbnail and title, and the rest is up
-to you. You can use any language and or framework you'd like. 
+Run the application with the following steps:
 
-![Giant Bomb](https://upload.wikimedia.org/wikipedia/en/4/4b/Giant_Bomb_logo.png)
+- Install [Leiningen](https://leiningen.org/)
+- Supply a valid `:gb-api-key` in the [dev-config.edn](dev-config.edn) file
+- Run these commands in a shell: `lein run migrate && lein run -Dconf=dev-config.edn`
 
-You can get started by signing up for an API key [here](https://www.giantbomb.com/api/).
+### Navigating the Application
 
-Note: You'll most likely need to use the social media technique for logging in (2022-05-16: confirmed this works with google.)  Once you're logged in, go back to the [API page](https://www.giantbomb.com/api/) to access your key.
+The main application files and directories are:
 
-### Resources
+- `giant-bomb.domain.games`=> API wrapper to search games and retrieve game details
+- `giant-bomb.domain.sales` => a "no-op" wrapper for pricing and payments
+- `giant-bomb.routs.home` => routing for web resources
+- `public/html/` => The HTML assets for the search and checkout pages
+- `public/migration/` => creates the `rentals` table
+- `public/sql` => queries on the `rentals` table
 
-You can find the quickstart guide
-[here](https://www.giantbomb.com/forums/api-developers-3017/quick-start-guide-to-using-the-api-1427959/). 
+### Possible Improvements
 
-You can find a full list of API features [here](https://www.giantbomb.com/api/documentation). 
-
-### Questions
-
-Don't hesitate to reach out with any questions. Remember we are more focused on seeing your
-development process than checking off a list of requirements, so be sure you are able to speak to your
-code and your thoughts behind it.
+- _Testing_ => unit, integration, and automated tests
+- _Rental Management_ => cancel rentals, marked as lost, etc
+- _Users_ => add a user management table so that users can save personal information and manage rentals
+- _Payments_ => implement a payments system, including a payment integration API (e.g. [PayPal](https://developer.paypal.com/docs/api/payments/v2/))
+- _Pricing_ => implement a dynamic pricing system, e.g. subscription accounts

@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="opblock is-fullheight">
+  <div class="opblock-body">
+    <div class="container">
+      <h2 class="title">Rental Confirmation</h2>
+
+      <div class="columns is-centered">
+        <div class="column">
+          <a class="level-left" href="{{game.site_detail_url}}" class="level-left"><img
+              src="{{game.image.medium_url}}">
+          </a>
+        </div>
+
+        <div class="column">
+          <form class="box" method="POST" action="/rent">
+            {% csrf-field %}
+            <input type="hidden" id="game_guid" name="game_guid" value="{{game.guid}}">
+
+            <div class="subtitle"><b>Contact Information</b></div>
+
+            <div class="field">
+              <label class="label">Email</label>
+              <div class="control">
+                <input class="input" type="email" id="email" name="email" placeholder="john.doe@example.com">
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label">Phone</label>
+              <div class="control">
+                <input class="input" type="tel" id="phone" name="phone" placeholder="555-555-5555">
+              </div>
+            </div>
+
+            <br/>
+            <div class="subtitle"><b>Payment Information</b></div>
+
+            <div class="field">
+              <label class="label">Name (as appears on credit card)</label>
+              <div class="control">
+                <input class="input" type="text" id="name" name="name" placeholder="John Doe">
+              </div>
+            </div>
+
+            <div class="level" style="margin-bottom: 0; margin-top: 0;">
+              <div class="field level-left level-item">
+                <label class="label">Credit Card Number</label>
+              </div>
+
+              <div class="field level-right level-item">
+                <label class="label">Expiration Date</label>
+              </div>
+            </div>
+
+            <div class="level" style="margin-bottom: 0; margin-top: 0;">
+              <div class="field level-left level-item">
+                <div class="control">
+                  <input class="input" type="text" id="credit_card_number" name="credit_card_number" placeholder="****************">
+                </div>
+              </div>
+
+              <div class="field level-right level-item">
+
+                <div class="control">
+                  <input class="input" type="text" id="credit_card_expiration" name="credit_card_expiration" placeholder="MM/YY">
+                </div>
+              </div>
+            </div>
+
+            <div class="level" style="margin-bottom: 0; margin-top: 0;">
+              <div class="field">
+                <label class="label level-left">Security Code</label>
+                <div class="control">
+                  <input class="input" type="password" id="credit_card_security_code" name="credit_card_security_code" placeholder="***">
+                </div>
+              </div>
+
+              <div class="field">
+                <label class="label level-right">Postal Code</label>
+                <div class="control">
+                  <input class="input" type="text" id="credit_card_postal_code" name="credit_card_postal_code" placeholder="12345">
+                </div>
+              </div>
+            </div>
+
+            <br/>
+            <div class="subtitle"><b>Shipping Information</b></div>
+
+            <div class="level" style="margin-bottom: 0; margin-top: 0;">
+              <div class="field level-left level-item">
+                <label class="label">Address Line 1</label>
+              </div>
+
+              <div class="field level-right level-item">
+                <label class="label">Address Line 2</label>
+              </div>
+            </div>
+
+            <div class="level" style="margin-bottom: 0; margin-top: 0;">
+              <div class="field level-left level-item">
+                <div class="control">
+                  <input class="input" type="text" id="address_line_1" name="address_line_1" placeholder="123 Main St">
+                </div>
+              </div>
+
+              <div class="field level-right level-item">
+                <div class="control">
+                  <input class="input" type="text" id="address_line_2" name="address_line_2" placeholder="Suite 100">
+                </div>
+              </div>
+            </div>
+
+            <div class="level" style="margin-bottom: 0; margin-top: 0;">
+              <div class="field">
+                <label class="label">City</label>
+                <div class="control">
+                  <input class="input" type="text" id="city" name="city" placeholder="Denver">
+                </div>
+              </div>
+
+              <div class="field">
+                <label class="label">State</label>
+                <div class="control">
+                  <input class="input" type="text" id="state" name="state" placeholder="CO">
+                </div>
+              </div>
+            </div>
+
+            <div class="level" style="margin-bottom: 0; margin-top: 0;">
+              <div class="field">
+                <label class="label">Postal Code</label>
+                <div class="control">
+                  <input class="input" type="text" id="postal_code" name="postal_code" placeholder="12345">
+                </div>
+              </div>
+            </div>
+
+            <br/>
+            <div class="field">
+              <button class="subtitle button is-success is-full"><b>Rent Now - ${{game.rental.monthly.usd}} / month</b></button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

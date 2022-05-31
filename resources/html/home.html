@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% if msg %}
+<div class="message box is-success"><b>{{msg}}</b></div>
+{% endif %}
+
+<p class="title"><b>Game Search</b></p>
+
+<form method="GET" action="/search">
+  <input class="form-control" type="text" name="query" value="{{query}}" style="height: 2em;">
+  <button class="button is-success" style="height: 1.75em;">Search</button>
+</form>
+<br/>
+
+{% for game in games %}
+<div class="levels">
+  <article class="card">
+    <div class="card-header">
+      <p class="card-header-title">{{game.name}}</p>
+    </div>
+
+    <div class="card-content columns has-text-left">
+      <div class="card-image has-text-left">
+        <a href="{{game.site_detail_url}}"><img
+            src="{{game.image.thumb_url}}"></a>
+      </div>
+
+      <div class="box has-text-left">
+        <span><b>Release Date:</b> {{game.original_release_date}}</span>
+        <br/><br/>
+        <span style="flex-wrap: wrap;">{{game.deck}}</span>
+      </div>
+    </div>
+
+    <div class="card-footer">
+      <form id="checkout" method="GET" action="/checkout">
+        <input type="hidden" name="guid" value="{{game.guid}}">
+        <button class="card-footer button is-success" type="submit" form="checkout" value="Submit">
+          Rent Now - ${{game.rental.monthly.usd}} / month
+        </button>
+      </form>
+      <a class="button" href="{{game.site_detail_url}}">Show Me More!</a>
+    </div>
+  </article>
+</div>
+<br/>
+{% endfor %}
+{% endblock %}
+
